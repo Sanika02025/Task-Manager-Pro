@@ -1,6 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+
+dotenv.config();
+
+connectDB();
 
 const app = express();
 
@@ -10,14 +15,14 @@ app.use(express.json());
 
 // Test Route
 app.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Task Tracker API is running 🚀"
-    });
+  res.json({
+    success: true,
+    message: "Task Tracker API is running 🚀",
+  });
 });
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
