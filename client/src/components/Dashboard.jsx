@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 
+
+import Modal from "./Modal";
 import Navbar from "./Navbar";
 import StatsCards from "./StatsCards";
 import SearchBar from "./SearchBar";
@@ -13,28 +15,57 @@ const [search, setSearch] = useState("");
 const [statusFilter, setStatusFilter] = useState("All");
 const [editTask, setEditTask] = useState(null);
 const [showForm, setShowForm] = useState(false);
-  const fetchTasks = async () => {
-    try {
-      const res = await API.get("/tasks");
-      setTasks(res.data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+const [sortBy, setSortBy] = useState("Newest");
+const [loading, setLoading] = useState(true);
+
+const fetchTasks = async () => {
+  try {
+    setLoading(true);
+    const res = await API.get("/tasks");
+    setTasks(res.data.data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchTasks();
   }, []);
-  const filteredTasks = tasks.filter((task) => {
-  const matchesSearch =
-    task.title.toLowerCase().includes(search.toLowerCase()) ||
-    task.description.toLowerCase().includes(search.toLowerCase());
+const filteredTasks = tasks
+  .filter((task) => {
+    const matchesSearch =
+      task.title.toLowerCase().includes(search.toLowerCase()) ||
+      task.description.toLowerCase().includes(search.toLowerCase());
 
-  const matchesStatus =
-    statusFilter === "All" || task.status === statusFilter;
+    const matchesStatus =
+      statusFilter === "All" ||
+      task.status === statusFilter;
 
-  return matchesSearch && matchesStatus;
-});
+    return matchesSearch && matchesStatus;
+  })
+  .sort((a, b) => {
+    switch (sortBy) {
+      case "Oldest":
+        return new Date(a.createdAt) - new Date(b.createdAt);
+
+      case "Priority": {
+        const priority = {
+          High: 3,
+          Medium: 2,
+          Low: 1,
+        };
+        return priority[b.priority] - priority[a.priority];
+      }
+
+      case "Due Date":
+        return new Date(a.dueDate || 0) - new Date(b.dueDate || 0);
+
+      default:
+        return new Date(b.createdAt) - new Date(a.createdAt);
+    }
+  });
 
  return (
   <div>
@@ -47,26 +78,52 @@ const [showForm, setShowForm] = useState(false);
   setSearch={setSearch}
   statusFilter={statusFilter}
   setStatusFilter={setStatusFilter}
+  sortBy={sortBy}
+  setSortBy={setSortBy}
 />
    {showForm && (
-  <TaskForm
+  <Modal onClose={() => setShowForm(false)}>
+    <TaskForm
+      fetchTasks={fetchTasks}
+      editTask={editTask}
+      setEditTask={setEditTask}
+      setShowForm={setShowForm}
+    />
+  </Modal>
+)}
+{loading ? (
+  <div style={{ textAlign: "center", marginTop: "40px" }}>
+    <h3>⏳ Loading tasks...</h3>
+  </div>
+) : (
+  <TaskList
+    tasks={filteredTasks}
     fetchTasks={fetchTasks}
-    editTask={editTask}
     setEditTask={setEditTask}
-    setShowForm={setShowForm}
   />
 )}
-
-      <TaskList
-        tasks={filteredTasks}
-        fetchTasks={fetchTasks}
-        setEditTask={setEditTask}
-      />
-
-    </div>
+  </div>
 
   </div>
 );
 }
-
+<button
+  onClick={() => setShowForm(true)}
+  style={{
+    position: "fixed",
+    right: "30px",
+    bottom: "30px",
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    width: "60px",
+    height: "60px",
+    borderRadius: "50%",
+    fontSize: "30px",
+    cursor: "pointer",
+    boxShadow: "0 10px 25px rgba(0,0,0,.3)",
+  }}
+>
+  +
+</button>
 export default Dashboard;

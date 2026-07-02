@@ -1,40 +1,33 @@
-import API from "../services/api";
-import toast from "react-hot-toast";
 import TaskCard from "./TaskCard";
 
 function TaskList({ tasks, fetchTasks, setEditTask }) {
-
-  const deleteTask = async (id) => {
-    try {
-      await API.delete(`/tasks/${id}`);
-
-toast.success("Task Deleted!");
-
-fetchTasks();
-    } catch (err) {
-     toast.error("Unable to delete task");
-console.log(err);
-    }
-  };
+  if (!tasks || tasks.length === 0) {
+    return (
+      <div
+        style={{
+          textAlign: "center",
+          padding: "50px",
+          color: "#666",
+        }}
+      >
+        <h2>📭 No Tasks Found</h2>
+        <p>Create your first task to get started 🚀</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="taskGrid">
-
-      {tasks.length === 0 ? (
-        <h2 style={{ textAlign: "center" }}>
-          No Tasks Found
-        </h2>
-      ) : (
-        tasks.map((task) => (
-         <TaskCard
-    key={task._id}
-    task={task}
-    onDelete={deleteTask}
-    onEdit={setEditTask}
-/>
-        ))
-      )}
-
+    <div>
+      {tasks.map((task) => (
+        <TaskCard
+          key={task._id}
+          task={task}
+          onDelete={async (id) => {
+            await fetchTasks();
+          }}
+          onEdit={setEditTask}
+        />
+      ))}
     </div>
   );
 }

@@ -26,6 +26,23 @@ function TaskCard({ task, onDelete, onEdit }) {
       >
         {task.description}
       </p>
+      <p
+        style={{
+          color:
+            task.dueDate &&
+            new Date(task.dueDate) < new Date() &&
+            task.status !== "Completed"
+              ? "red"
+              : "#666",
+          fontWeight: "600",
+          marginBottom: "18px",
+        }}
+      >
+        📅{" "}
+        {task.dueDate
+          ? new Date(task.dueDate).toLocaleDateString()
+          : "No Due Date"}
+      </p>
 
       <div
         style={{

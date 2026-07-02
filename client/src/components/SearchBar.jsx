@@ -1,37 +1,41 @@
-function SearchBar() {
+function SearchBar({
+  search,
+  setSearch,
+  statusFilter,
+  setStatusFilter,
+  sortBy,
+  setSortBy,
+}) {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "20px",
-        margin: "30px 0",
-      }}
-    >
+    <div className="search">
       <input
         type="text"
         placeholder="🔍 Search tasks..."
-        style={{
-          flex: 1,
-          padding: "14px",
-          borderRadius: "12px",
-          border: "1px solid #ddd",
-          fontSize: "16px",
-        }}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
 
       <select
-        style={{
-          padding: "14px",
-          borderRadius: "12px",
-          border: "1px solid #ddd",
-        }}
+        value={statusFilter}
+        onChange={(e) => setStatusFilter(e.target.value)}
       >
-        <option>All Status</option>
-        <option>Pending</option>
-        <option>In Progress</option>
-        <option>Completed</option>
+        <option value="All">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="Newest">Newest</option>
+        <option value="Oldest">Oldest</option>
+        <option value="Priority">Priority</option>
+        <option value="Due Date">Due Date</option>
       </select>
     </div>
   );
 }
+
 export default SearchBar;

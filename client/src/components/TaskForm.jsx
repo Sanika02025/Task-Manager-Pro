@@ -8,12 +8,13 @@ editTask,
 setEditTask,
 setShowForm
 }){
-  const [task, setTask] = useState({
-    title: "",
-    description: "",
-    status: "Pending",
-    priority: "Medium",
-  });
+const [task, setTask] = useState({
+  title: "",
+  description: "",
+  status: "Pending",
+  priority: "Medium",
+  dueDate: "",
+});
 
   useEffect(() => {
     if (editTask) {
@@ -38,13 +39,13 @@ setShowForm
       } else {
         await API.post("/tasks", task);
       }
-
-      setTask({
-        title: "",
-        description: "",
-        status: "Pending",
-        priority: "Medium",
-      });
+setTask({
+  title: "",
+  description: "",
+  status: "Pending",
+  priority: "Medium",
+  dueDate: "",
+});
 
       fetchTasks();
 
@@ -63,7 +64,14 @@ console.log(err);
 
 return (
   <form className="taskForm" onSubmit={handleSubmit}>
-
+<h2
+  style={{
+    marginBottom: "20px",
+    color: "#2563eb",
+  }}
+>
+  {editTask ? "Edit Task" : "Create New Task"}
+</h2>
     <input
       name="title"
       placeholder="Task Title"
@@ -79,7 +87,12 @@ return (
       value={task.description}
       onChange={handleChange}
     />
-
+    <input
+  type="date"
+  name="dueDate"
+  value={task.dueDate}
+  onChange={handleChange}
+/>
     <div className="formRow">
 
       <select
