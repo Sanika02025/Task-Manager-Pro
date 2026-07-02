@@ -1,0 +1,49 @@
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 50px;
+
+    background:white;
+
+    box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+.navbar h1{
+    margin:0;
+    color:#2563eb;
+    font-size:32px;
+}
+
+.navbar p{
+    margin-top:6px;
+    color:#666;
+}
+
+.addBtn{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+}
+
+.addBtn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
