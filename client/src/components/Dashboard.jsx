@@ -1,5 +1,3 @@
-const [showForm, setShowForm] = useState(false);
-import "../styles/dashboard.css";
 import { useEffect, useState } from "react";
 import API from "../services/api";
 
@@ -11,9 +9,10 @@ import TaskForm from "./TaskForm";
 
 function Dashboard() {
   const [tasks, setTasks] = useState([]);
-  const [editTask, setEditTask] = useState(null);
-
-  // Fetch all tasks
+const [search, setSearch] = useState("");
+const [statusFilter, setStatusFilter] = useState("All");
+const [editTask, setEditTask] = useState(null);
+const [showForm, setShowForm] = useState(false);
   const fetchTasks = async () => {
     try {
       const res = await API.get("/tasks");
@@ -26,16 +25,30 @@ function Dashboard() {
   useEffect(() => {
     fetchTasks();
   }, []);
+  const filteredTasks = tasks.filter((task) => {
+  const matchesSearch =
+    task.title.toLowerCase().includes(search.toLowerCase()) ||
+    task.description.toLowerCase().includes(search.toLowerCase());
 
-return (
-<div className="container">
+  const matchesStatus =
+    statusFilter === "All" || task.status === statusFilter;
 
-     <Navbar setShowForm={setShowForm} />
+  return matchesSearch && matchesStatus;
+});
+
+ return (
+  <div>
+<Navbar setShowForm={setShowForm} />
+  <div className="container">
 
       <StatsCards tasks={tasks} />
-
-      <SearchBar />
-{showForm && (
+<SearchBar
+  search={search}
+  setSearch={setSearch}
+  statusFilter={statusFilter}
+  setStatusFilter={setStatusFilter}
+/>
+   {showForm && (
   <TaskForm
     fetchTasks={fetchTasks}
     editTask={editTask}
@@ -43,14 +56,17 @@ return (
     setShowForm={setShowForm}
   />
 )}
+
       <TaskList
-        tasks={tasks}
+        tasks={filteredTasks}
         fetchTasks={fetchTasks}
         setEditTask={setEditTask}
       />
 
     </div>
-  );
+
+  </div>
+);
 }
 
 export default Dashboard;

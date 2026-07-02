@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import API from "../services/api";
 
 function TaskForm({
@@ -46,29 +47,40 @@ setShowForm
       });
 
       fetchTasks();
-      setShowForm(false);
+
+toast.success(
+  editTask
+    ? "Task Updated Successfully!"
+    : "Task Added Successfully!"
+);
+
+setShowForm(false);
     } catch (err) {
-      console.log(err);
+      toast.error("Something went wrong!");
+console.log(err);
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
+return (
+  <form className="taskForm" onSubmit={handleSubmit}>
 
-      <input
-        name="title"
-        placeholder="Task Title"
-        value={task.title}
-        onChange={handleChange}
-        required
-      />
+    <input
+      name="title"
+      placeholder="Task Title"
+      value={task.title}
+      onChange={handleChange}
+      required
+    />
 
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={task.description}
-        onChange={handleChange}
-      />
+    <textarea
+      name="description"
+      placeholder="Description"
+      rows="4"
+      value={task.description}
+      onChange={handleChange}
+    />
+
+    <div className="formRow">
 
       <select
         name="priority"
@@ -90,12 +102,13 @@ setShowForm
         <option>Completed</option>
       </select>
 
-      <button type="submit">
-        {editTask ? "Update Task" : "Add Task"}
-      </button>
+    </div>
 
-    </form>
-  );
+    <button type="submit">
+      {editTask ? "Update Task" : "Add Task"}
+    </button>
+
+  </form>
+);
 }
-
 export default TaskForm;

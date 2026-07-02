@@ -1,4 +1,5 @@
 import API from "../services/api";
+import toast from "react-hot-toast";
 import TaskCard from "./TaskCard";
 
 function TaskList({ tasks, fetchTasks, setEditTask }) {
@@ -6,9 +7,13 @@ function TaskList({ tasks, fetchTasks, setEditTask }) {
   const deleteTask = async (id) => {
     try {
       await API.delete(`/tasks/${id}`);
-      fetchTasks();
+
+toast.success("Task Deleted!");
+
+fetchTasks();
     } catch (err) {
-      console.log(err);
+     toast.error("Unable to delete task");
+console.log(err);
     }
   };
 
