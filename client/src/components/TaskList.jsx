@@ -1,6 +1,17 @@
+import API from "../services/api";
 import TaskCard from "./TaskCard";
 
 function TaskList({ tasks, fetchTasks, setEditTask }) {
+
+  const deleteTask = async (id) => {
+    try {
+      await API.delete(`/tasks/${id}`);
+      fetchTasks();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   if (!tasks || tasks.length === 0) {
     return (
       <div
@@ -17,14 +28,12 @@ function TaskList({ tasks, fetchTasks, setEditTask }) {
   }
 
   return (
-    <div>
+    <div className="taskGrid">
       {tasks.map((task) => (
         <TaskCard
           key={task._id}
           task={task}
-          onDelete={async (id) => {
-            await fetchTasks();
-          }}
+          onDelete={deleteTask}
           onEdit={setEditTask}
         />
       ))}

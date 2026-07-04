@@ -96,11 +96,14 @@ const filteredTasks = tasks
     <h3>⏳ Loading tasks...</h3>
   </div>
 ) : (
-  <TaskList
-    tasks={filteredTasks}
-    fetchTasks={fetchTasks}
-    setEditTask={setEditTask}
-  />
+<TaskList
+  tasks={filteredTasks}
+  fetchTasks={fetchTasks}
+  setEditTask={(task) => {
+    setEditTask(task);
+    setShowForm(true);
+  }}
+/>
 )}
   </div>
 

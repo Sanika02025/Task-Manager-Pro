@@ -1,56 +1,68 @@
+const getPriorityStyle = (priority) => {
+  switch (priority) {
+    case "High":
+      return {
+        background: "#FEE2E2",
+        color: "#DC2626",
+      };
+
+    case "Medium":
+      return {
+        background: "#FEF3C7",
+        color: "#CA8A04",
+      };
+
+    default:
+      return {
+        background: "#DCFCE7",
+        color: "#15803D",
+      };
+  }
+};
+
+const getStatusStyle = (status) => {
+  switch (status) {
+    case "Completed":
+      return {
+        background: "#DCFCE7",
+        color: "#15803D",
+      };
+
+    case "In Progress":
+      return {
+        background: "#DBEAFE",
+        color: "#2563EB",
+      };
+
+    default:
+      return {
+        background: "#FEF3C7",
+        color: "#CA8A04",
+      };
+  }
+};
+
 function TaskCard({ task, onDelete, onEdit }) {
   return (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: "16px",
-        padding: "22px",
-        marginBottom: "20px",
-        boxShadow: "0 8px 20px rgba(0,0,0,.08)",
-      }}
-    >
-      <h2
-        style={{
-          marginBottom: "10px",
-          color: "#222",
-        }}
-      >
-        {task.title}
-      </h2>
-
-      <p
-        style={{
-          color: "#666",
-          marginBottom: "20px",
-        }}
-      >
-        {task.description}
-      </p>
-      <p
-        style={{
-          color:
-            task.dueDate &&
-            new Date(task.dueDate) < new Date() &&
-            task.status !== "Completed"
-              ? "red"
-              : "#666",
-          fontWeight: "600",
-          marginBottom: "18px",
-        }}
-      >
-        📅{" "}
-        {task.dueDate
-          ? new Date(task.dueDate).toLocaleDateString()
-          : "No Due Date"}
-      </p>
-
-      <div
-        style={{
-          display: "flex",
-          gap: "12px",
-          marginBottom: "20px",
-        }}
-      >
+<div className="taskCard">
+      <h2 className="taskTitle">
+  {task.title}
+</h2>
+<p
+  className={
+    task.dueDate &&
+    new Date(task.dueDate) < new Date() &&
+    task.status !== "Completed"
+      ? "dueDate overdue"
+      : "dueDate"
+  }
+>
+  📅{" "}
+  {task.dueDate
+    ? new Date(task.dueDate).toLocaleDateString()
+    : "No Due Date"}
+</p>
+<div className="taskFooter">
         <span
           style={{
             padding: "8px 16px",
@@ -95,40 +107,17 @@ function TaskCard({ task, onDelete, onEdit }) {
           📌 {task.status}
         </span>
       </div>
-
-      <div
-        style={{
-          display: "flex",
-          gap: "12px",
-        }}
-      >
-        <button
-          onClick={() => onEdit(task)}
-          style={{
-            background: "#2563EB",
-            color: "#fff",
-            border: "none",
-            padding: "10px 18px",
-            borderRadius: "10px",
-            cursor: "pointer",
-          }}
-        >
-          ✏ Edit
-        </button>
-
-        <button
-          onClick={() => onDelete(task._id)}
-          style={{
-            background: "#EF4444",
-            color: "#fff",
-            border: "none",
-            padding: "10px 18px",
-            borderRadius: "10px",
-            cursor: "pointer",
-          }}
-        >
-          🗑 Delete
-        </button>
+<div className="actions">
+<button
+  onClick={() => {
+    onEdit(task);
+  }}
+>
+  ✏ Edit
+</button>
+       <button onClick={() => onDelete(task._id)}>
+  🗑 Delete
+</button>
       </div>
     </div>
   );
