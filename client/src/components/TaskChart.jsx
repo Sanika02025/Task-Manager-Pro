@@ -24,14 +24,14 @@ function TaskChart({ tasks }) {
 
       <ResponsiveContainer width="100%" height={220}>
         <PieChart>
-         <Pie
-data={data}
-dataKey="value"
-innerRadius={65}
-outerRadius={105}
-paddingAngle={5}
-label
->
+          <Pie
+            data={data}
+            dataKey="value"
+            innerRadius={65}
+            outerRadius={105}
+            paddingAngle={5}
+            label
+          >
             {data.map((entry, index) => (
               <Cell key={index} fill={COLORS[index]} />
             ))}
@@ -41,32 +41,24 @@ label
         </PieChart>
       </ResponsiveContainer>
       <div className="chartLegend">
+        <div>
+          <span className="green"></span>
+          Completed
+          <strong>{data[0].value}</strong>
+        </div>
 
-<div>
-<span className="green"></span>
-Completed
-<strong>
-{data[0].value}
-</strong>
-</div>
+        <div>
+          <span className="orange"></span>
+          Pending
+          <strong>{data[1].value}</strong>
+        </div>
 
-<div>
-<span className="orange"></span>
-Pending
-<strong>
-{data[1].value}
-</strong>
-</div>
-
-<div>
-<span className="blue"></span>
-In Progress
-<strong>
-{data[2].value}
-</strong>
-</div>
-
-</div>
+        <div>
+          <span className="blue"></span>
+          In Progress
+          <strong>{data[2].value}</strong>
+        </div>
+      </div>
     </div>
   );
 }
