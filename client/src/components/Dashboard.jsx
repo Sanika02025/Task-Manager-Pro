@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import ProgressCard from "./ProgressCard";
 
+import TaskChart from "./TaskChart";
+import DashboardHeader from "./DashboardHeader";
 import "../styles/Dashboard.css";
 import Modal from "./Modal";
 import Navbar from "./Navbar";
@@ -71,10 +73,17 @@ const filteredTasks = tasks
  return (
   <div>
 <Navbar setShowForm={setShowForm} />
-  <div className="container">
 
-      <StatsCards tasks={tasks} />
-      <ProgressCard tasks={tasks} />
+  <div className="container">
+<DashboardHeader tasks={tasks} />
+
+<StatsCards tasks={tasks} />
+
+<div className="analyticsSection">
+  <TaskChart tasks={tasks} />
+  <ProgressCard tasks={tasks} />
+</div>
+
 <SearchBar
   search={search}
   setSearch={setSearch}
