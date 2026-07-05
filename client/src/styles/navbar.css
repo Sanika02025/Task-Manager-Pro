@@ -2,48 +2,129 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-
     padding:20px 50px;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
 
+.navLeft h1{
+    color:white;
+    font-size:30px;
+    margin-bottom:5px;
+}
+
+.navLeft p{
+    color:#dbeafe;
+    font-size:15px;
+}
+
+.navRight{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.notificationBtn{
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
     background:white;
-
-    box-shadow:0 4px 20px rgba(0,0,0,.08);
+    cursor:pointer;
+    font-size:20px;
+    transition:.3s;
 }
 
-.navbar h1{
-    margin:0;
-    color:#2563eb;
-    font-size:32px;
-}
-
-.navbar p{
-    margin-top:6px;
-    color:#666;
+.notificationBtn:hover{
+    transform:scale(1.08);
 }
 
 .addBtn{
-
+    background:white;
+    color:#2563eb;
     border:none;
-
-    background:#2563eb;
-
-    color:white;
-
-    padding:12px 24px;
-
-    border-radius:10px;
-
+    padding:12px 22px;
+    border-radius:12px;
+    font-weight:600;
     cursor:pointer;
-
-    font-size:16px;
-
     transition:.3s;
 }
 
 .addBtn:hover{
-
-    background:#1d4ed8;
-
     transform:translateY(-2px);
+}
 
+.profile{
+    position:relative;
+}
+
+.profileBtn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:white;
+    padding:8px 14px;
+    border-radius:50px;
+    cursor:pointer;
+}
+
+.profileBtn img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+}
+
+.profileBtn h4{
+    margin:0;
+    color:#222;
+    font-size:15px;
+}
+
+.profileBtn p{
+    margin:2px 0 0;
+    color:#666;
+    font-size:12px;
+}
+
+.profileDropdown{
+    position:absolute;
+    right:0;
+    top:70px;
+    width:220px;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    z-index:100;
+}
+
+.menuItem{
+    padding:15px;
+    cursor:pointer;
+    transition:.25s;
+    color:#333;
+    font-weight:500;
+}
+
+.menuItem:hover{
+    background:#eef4ff;
+}
+
+.logout{
+    color:#ef4444;
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:18px;
+        text-align:center;
+        padding:20px;
+    }
+
+    .navRight{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
 }

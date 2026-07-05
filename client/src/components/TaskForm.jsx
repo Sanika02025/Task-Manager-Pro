@@ -8,12 +8,13 @@ editTask,
 setEditTask,
 setShowForm
 }){
-const [task, setTask] = useState({
-  title: "",
-  description: "",
-  status: "Pending",
-  priority: "Medium",
-  dueDate: "",
+const [task,setTask]=useState({
+title:"",
+description:"",
+status:"Pending",
+priority:"Medium",
+category:"Personal",
+dueDate:"",
 });
 
   useEffect(() => {
@@ -52,7 +53,7 @@ setTask({
 toast.success(
   editTask
     ? "Task Updated Successfully!"
-    : "Task Added Successfully!"
+    : "Task Created Successfully!"
 );
 
 setShowForm(false);
@@ -104,6 +105,16 @@ return (
         <option>Medium</option>
         <option>Low</option>
       </select>
+      <select
+    name="category"
+    value={task.category}
+    onChange={handleChange}
+>
+    <option>Personal</option>
+    <option>Work</option>
+    <option>Study</option>
+    <option>Shopping</option>
+</select>
 
       <select
         name="status"

@@ -139,17 +139,12 @@ box-shadow:0 20px 45px rgba(37,99,235,.12);
 .taskCard::before{
 content:"";
 position:absolute;
-top:0;
 left:0;
-width:100%;
-height:5px;
-background:linear-gradient(
-90deg,
-#2563eb,
-#7c3aed
-);
+top:0;
+bottom:0;
+width:6px;
+background:#2563eb;
 }
-
 .taskCard h3{
 margin-bottom:10px;
 }
@@ -209,4 +204,301 @@ color:#64748b;
 }
 .overdue{
 color:#ef4444;
+}
+/* empty state */
+.emptyState{
+    background:white;
+    padding:70px 20px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+.emptyIcon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+.emptyState h2{
+    color:#1e293b;
+    margin-bottom:10px;
+}
+.emptyState p{
+    color:#64748b;
+    font-size:16px;
+}
+.spinner{
+    width:55px;
+    height:55px;
+    border:5px solid #dbeafe;
+    border-top:5px solid #2563eb;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:70px auto;
+}
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+.modalOverlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:1000;
+-webkit-backdrop-filter:blur(4px);
+backdrop-filter:blur(4px);
+}
+.modalContent{
+position:relative;
+background:white;
+width:600px;
+max-width:95%;
+border-radius:20px;
+padding:30px;
+box-shadow:0 25px 60px rgba(0,0,0,.25);
+animation:popup .25s ease;
+}
+
+.closeBtn{
+position:absolute;
+top:18px;
+right:18px;
+width:36px;
+height:36px;
+border:none;
+border-radius:50%;
+background:#eef2ff;
+cursor:pointer;
+font-size:18px;
+transition:.25s;
+}
+
+.closeBtn:hover{
+background:#2563eb;
+color:white;
+transform:rotate(90deg);
+}
+
+@keyframes popup{
+from{
+opacity:0;
+transform:scale(.9);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
+
+.cardIcon{
+width:55px;
+height:55px;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+color:white;
+margin-bottom:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.card h3{
+font-size:15px;
+font-weight:600;
+color:#64748b;
+margin-bottom:10px;
+}
+
+.card h1{
+font-size:34px;
+font-weight:700;
+}
+
+.floatingBtn{
+position:fixed;
+right:30px;
+bottom:30px;
+width:65px;
+height:65px;
+border:none;
+border-radius:50%;
+background:linear-gradient(
+135deg,
+#2563eb,
+#4f46e5
+);
+
+color:white;
+font-size:32px;
+cursor:pointer;
+box-shadow:0 15px 35px rgba(37,99,235,.35);
+transition:.3s;
+}
+
+.floatingBtn:hover{
+transform:scale(1.1) rotate(90deg);
+}
+
+
+/* ===========================
+   Progress Card
+=========================== */
+.progressCard{
+background:white;
+padding:28px;
+border-radius:20px;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+margin-bottom:30px;
+}
+.progressHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+.progressHeader h2{
+font-size:24px;
+margin-bottom:5px;
+}
+.progressHeader p{
+color:#64748b;
+}
+.progressHeader h1{
+color:#2563eb;
+font-size:42px;
+}
+.progressPercent{
+font-size:42px;
+font-weight:700;
+color:#2563eb;
+}
+.progressBar{
+width:100%;
+height:12px;
+background:#e5e7eb;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:15px;
+}
+.progressMessage{
+margin-top:18px;
+font-weight:600;
+color:#2563eb;
+}
+.progressFill{
+height:100%;
+
+background:linear-gradient(
+90deg,
+#2563eb,
+#4f46e5
+);
+
+border-radius:20px;
+transition:width .5s ease;
+}
+
+.progressCard p{
+color:#64748b;
+margin-bottom:10px;
+}
+
+.progressCard h4{
+color:#2563eb;
+font-weight:600;
+}
+.category {
+display:inline-block;
+margin-bottom:18px;
+padding:7px 14px;
+border-radius:30px;
+background:#eef4ff;
+color:#2563eb;
+font-weight:600;
+font-size:14px;
+}
+
+.progressCard{
+    background:white;
+    padding:28px;
+    border-radius:20px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.progressHeader{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.progressPercent{
+    font-size:34px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.progressBar{
+    height:12px;
+    background:#e5e7eb;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.progressFill{
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#4f46e5);
+    border-radius:20px;
+}
+
+.progressText{
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+.progressMessage{
+    color:#2563eb;
+    font-weight:600;
+}
+
+
+
+
+
+@media(max-width:1000px){
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+}
+@media(max-width:768px){
+.stats{
+grid-template-columns:1fr;
+}
+.search{
+flex-direction:column;
+}
+.taskForm{
+grid-template-columns:1fr;
+}
+.taskForm textarea{
+grid-column:1;
+}
+.container{
+padding:20px;
+}
+.navbar{
+padding:20px;
+flex-direction:column;
+gap:15px;
+text-align:center;
+}
+.actions{
+flex-direction:column;
+}
 }

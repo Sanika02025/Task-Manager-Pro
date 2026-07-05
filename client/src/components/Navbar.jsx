@@ -1,12 +1,29 @@
+import "../styles/navbar.css";
+import ProfileMenu from "./ProfileMenu";
+
 function Navbar({ setShowForm }) {
   return (
     <nav className="navbar">
-      <div className="container navTop">
 
-        <div className="navTitle">
-          <h1>🚀 Task Tracker Pro</h1>
-          <p>Organize your work efficiently</p>
-        </div>
+      <div className="navLeft">
+
+        <h1>🚀 Task Tracker Pro</h1>
+
+        <p>
+          Organize your work efficiently
+        </p>
+
+      </div>
+
+      <div className="navRight">
+
+        <button
+          className="notificationBtn"
+        >
+          🔔
+        </button>
+
+        <ProfileMenu />
 
         <button
           className="addBtn"
@@ -16,6 +33,7 @@ function Navbar({ setShowForm }) {
         </button>
 
       </div>
+
     </nav>
   );
 }

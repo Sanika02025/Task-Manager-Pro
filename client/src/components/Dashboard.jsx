@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
-
+import ProgressCard from "./ProgressCard";
 
 import Modal from "./Modal";
 import Navbar from "./Navbar";
@@ -73,6 +73,7 @@ const filteredTasks = tasks
   <div className="container">
 
       <StatsCards tasks={tasks} />
+      <ProgressCard tasks={tasks} />
 <SearchBar
   search={search}
   setSearch={setSearch}
@@ -92,8 +93,8 @@ const filteredTasks = tasks
   </Modal>
 )}
 {loading ? (
-  <div style={{ textAlign: "center", marginTop: "40px" }}>
-    <h3>⏳ Loading tasks...</h3>
+  <div className="floatingBtn">
+   <div className="spinner"></div>
   </div>
 ) : (
 <TaskList

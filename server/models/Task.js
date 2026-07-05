@@ -24,6 +24,10 @@ const taskSchema = new mongoose.Schema(
       default: "Medium",
     },
 
+    category: {
+    type: String,
+    default: "Personal",
+},
     dueDate: {
       type: Date,
     },

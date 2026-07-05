@@ -44,7 +44,17 @@ const getStatusStyle = (status) => {
 
 function TaskCard({ task, onDelete, onEdit }) {
   return (
-<div className="taskCard">
+<div
+className="taskCard"
+style={{
+borderLeft:
+task.priority==="High"
+? "6px solid #ef4444"
+: task.priority==="Medium"
+? "6px solid #f59e0b"
+: "6px solid #22c55e"
+}}
+>
       <h2 className="taskTitle">
   {task.title}
 </h2>
@@ -62,6 +72,9 @@ function TaskCard({ task, onDelete, onEdit }) {
     ? new Date(task.dueDate).toLocaleDateString()
     : "No Due Date"}
 </p>
+<div className="category">
+    {task.category}
+</div>
 <div className="taskFooter">
         <span
           style={{
@@ -115,9 +128,21 @@ function TaskCard({ task, onDelete, onEdit }) {
 >
   ✏ Edit
 </button>
-       <button onClick={() => onDelete(task._id)}>
+       
+       <button
+  onClick={() => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${task.title}"?`
+    );
+
+    if (confirmDelete) {
+      onDelete(task._id);
+    }
+  }}
+>
   🗑 Delete
 </button>
+
       </div>
     </div>
   );

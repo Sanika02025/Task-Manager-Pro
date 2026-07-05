@@ -6,11 +6,13 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <>
-      <App />
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-      />
+     <App />
+<Toaster
+  position="top-right"
+  toastOptions={{
+    duration: 2500,
+  }}
+/>
     </>
   </React.StrictMode>
 );
