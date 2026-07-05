@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import ProgressCard from "./ProgressCard";
 
+import "../styles/Dashboard.css";
 import Modal from "./Modal";
 import Navbar from "./Navbar";
 import StatsCards from "./StatsCards";

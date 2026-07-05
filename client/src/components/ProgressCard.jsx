@@ -12,9 +12,9 @@ function ProgressCard({ tasks }) {
     <div className="progressCard">
 
       <div className="progressHeader">
-
-        <h2>📈 Progress Overview</h2>
-
+<h2 style={{ color: "red", fontSize: "40px" }}>
+  TEST PROGRESS
+</h2>
         <div className="progressPercent">
           {percentage}%
         </div>
