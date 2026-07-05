@@ -47,13 +47,12 @@ setTask({
   priority: "Medium",
   dueDate: "",
 });
-
-      fetchTasks();
+fetchTasks();
 
 toast.success(
   editTask
-    ? "Task Updated Successfully!"
-    : "Task Created Successfully!"
+    ? "Task updated successfully!"
+    : "Task added successfully!"
 );
 
 setShowForm(false);
