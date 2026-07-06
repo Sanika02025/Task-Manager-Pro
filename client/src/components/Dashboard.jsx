@@ -4,7 +4,7 @@ import ProgressCard from "./ProgressCard";
 
 import TaskChart from "./TaskChart";
 import DashboardHeader from "./DashboardHeader";
-import "../styles/Dashboard.css";
+import "../styles/dashboard.css";
 import Modal from "./Modal";
 import Navbar from "./Navbar";
 import StatsCards from "./StatsCards";
